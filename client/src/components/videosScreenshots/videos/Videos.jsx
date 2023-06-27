@@ -1,3 +1,4 @@
+import React from "react";
 import VideoInput from "./VideoInput";
 
 const Videos = ({
@@ -47,4 +48,4 @@ const Videos = ({
   );
 };
 
-export default Videos;
+export default React.memo(Videos);
