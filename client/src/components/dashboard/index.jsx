@@ -7,17 +7,15 @@ const index = () => {
   return (
     <div className="text-center">
       <img src={TitleIcon} className="mx-auto w-7/12" />
-      <div className="border-2 rounded-2xl mt-5 flex justify-around items-center bg-gray-800 opacity-80">
-        <Link to="/videosscreenshot">
-          <motion.button whileTap={{ scale: 0.9 }}>
-            <img
-              src={BaseBallIcon}
-              alt="video"
-              className="w-20 cursor-pointer"
-            />
-          </motion.button>
-        </Link>
-      </div>
+      <Link to="/videosscreenshot">
+        <motion.div
+          whileTap={{ scale: 0.9 }}
+          className="flex items-center justify-around border-2 rounded-2xl mt-5 bg-green-600 opacity-80"
+        >
+          <img src={BaseBallIcon} alt="video" className="w-20" />
+          <p className="font-semibold text-lg">Swing Compare</p>
+        </motion.div>
+      </Link>
       <div className="border-2 rounded-2xl mt-5 py-3 text-gray-400">
         <Link to="/screenshots">
           <motion.button

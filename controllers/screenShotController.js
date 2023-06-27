@@ -56,18 +56,20 @@ const deleteVideo = (req, res) => {
   ScreenShots.findOneAndRemove({ _id: id })
     .then(async (response) => {
       res.status(200).json(response);
-      response.pictures.forEach(async (pic) => {
-        const identifier = findId(pic.path);
-        await cloudinary.uploader.destroy("baseball/images/" + identifier);
-      });
-      const identifier = findId(response.audio);
-      const result = await cloudinary.uploader.destroy(
-        "baseball/audios/" + identifier,
-        {
+      if (response.pictures.length) {
+        response.pictures.forEach(async (pic) => {
+          const identifier = findId(pic.path);
+          await cloudinary.uploader.destroy("baseball/images/" + identifier, {
+            resource_type: "image",
+          });
+        });
+      }
+      if (response.audio) {
+        const identifier = findId(response.audio);
+        await cloudinary.uploader.destroy("baseball/audios/" + identifier, {
           resource_type: "video",
-        }
-      );
-      console.log(result);
+        });
+      }
     })
     .catch(() => {
       serverError(res);

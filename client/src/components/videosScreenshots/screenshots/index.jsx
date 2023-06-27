@@ -51,6 +51,7 @@ const Index = ({
   const handleTakeSave = (value) => {
     const element = document.getElementById("draw-capture");
     if (value === "save") {
+      setEnable(false);
       domtoimage
         .toPng(element)
         .then(async function (dataUrl) {
@@ -152,7 +153,6 @@ const Index = ({
   };
 
   const saveScreenShotHandler = (gotUrls) => {
-    setEnable(false);
     const formData = new FormData();
     gotUrls.map((ss) => formData.append("files", ss.screenshot));
     formData.append("files", audioBlob);
