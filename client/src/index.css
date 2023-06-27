@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  body {
+    font-family: "Poppins", sans-serif;
+  }
+  .wrapper {
+    min-height: calc(100vh - 250px);
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 40px !important;
+    color: #00ff00 !important;
+  }
+  .slick-prev {
+    left: -45px !important;
+  }
+  .slick-dots li button:before {
+    background: #00ff00 !important;
+    font-size: 13px !important;
+    background: transparent !important;
+  }
+  .slick-dots li.slick-active button:before {
+    opacity: 1 !;
+    color: #00ff00 !important;
+  }
+}
