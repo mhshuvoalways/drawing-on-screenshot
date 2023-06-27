@@ -1,4 +1,9 @@
-// let baseUrl = "https://baseball-direction.cyclic.app";
-let baseUrl = "http://localhost:5000";
+let baseUrl;
+
+if (import.meta.env.VITE_DEV) {
+  baseUrl = "http://localhost:5000";
+} else {
+  baseUrl = "https://baseball-direction.cyclic.app";
+}
 
 export default baseUrl;
