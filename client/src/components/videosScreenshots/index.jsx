@@ -65,12 +65,12 @@ const Index = () => {
 
   const handleSkipForward = () => {
     const video = videoRef.current;
-    video.currentTime += video.duration * 0.03;
+    video.currentTime += video.duration * 0.01;
   };
 
   const handleSkipBackward = () => {
     const video = videoRef.current;
-    video.currentTime -= video.duration * 0.03;
+    video.currentTime -= video.duration * 0.01;
   };
 
   const handleSeek = (e) => {
@@ -129,12 +129,12 @@ const Index = () => {
 
   const handleSkipForwardYouth = () => {
     const video = videoRefYouth.current;
-    video.currentTime += video.duration * 0.03;
+    video.currentTime += video.duration * 0.01;
   };
 
   const handleSkipBackwardYouth = () => {
     const video = videoRefYouth.current;
-    video.currentTime -= video.duration * 0.03;
+    video.currentTime -= video.duration * 0.01;
   };
 
   const handleSeekYouth = (e) => {

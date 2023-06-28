@@ -30,7 +30,7 @@ const ScreenShots = ({
               screenshotUrl.length &&
               URL.createObjectURL(screenshotUrl[currentImage]?.screenshot)
             })`,
-            height: `calc(100vh - 300px)`
+            height: `calc(100vh - 120px)`
           }}
           id="draw-capture"
           ref={divRef}

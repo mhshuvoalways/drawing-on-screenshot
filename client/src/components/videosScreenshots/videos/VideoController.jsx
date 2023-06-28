@@ -35,6 +35,7 @@ const VideoController = ({
         min="0"
         max={videoRef.current ? videoRef.current.duration : 0}
         onChange={handleSeek}
+        step="0.01"
       />
       <input
         type="range"
@@ -43,6 +44,7 @@ const VideoController = ({
         min="0"
         max={videoRefYouth.current ? videoRefYouth.current.duration : 0}
         onChange={handleSeekYouth}
+        step="0.01"
       />
       <div className="flex justify-between gap-2 items-center flex-wrap">
         <div className="flex items-center">
@@ -83,8 +85,7 @@ const VideoController = ({
         <select
           className=" outline-0 rounded-md text-black px-1 py-1"
           onChange={(event) => {
-            handlePlayPause();
-            handlePlayPauseYouth();
+            toggleTop === "top" ? handlePlayPause() : handlePlayPauseYouth();
             setToggleTop(event.target.value);
           }}
         >
