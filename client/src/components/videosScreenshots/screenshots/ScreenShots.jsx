@@ -24,12 +24,13 @@ const ScreenShots = ({
       ></i>
       <div className="relative w-full">
         <div
-          className="bg-center bg-no-repeat bg-cover h-96 w-full"
+          className="bg-center bg-no-repeat bg-cover w-full"
           style={{
             backgroundImage: `url(${
               screenshotUrl.length &&
               URL.createObjectURL(screenshotUrl[currentImage]?.screenshot)
             })`,
+            height: `calc(100vh - 300px)`
           }}
           id="draw-capture"
           ref={divRef}

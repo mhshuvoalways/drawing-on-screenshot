@@ -32,7 +32,7 @@ const PlayerVideoView = ({
       <div className="flex relative">
         {blob && (
           <video
-            className="w-full max-h-screen"
+            className=""
             ref={videoRef}
             src={URL.createObjectURL(blob)}
           />
@@ -48,7 +48,7 @@ const PlayerVideoView = ({
   } else if (playerVideo) {
     return (
       <div className="flex relative">
-        <video className="w-full max-h-screen" ref={videoRef}>
+        <video className="" ref={videoRef}>
           <source
             src={URL.createObjectURL(playerVideo)}
             type={playerVideo.type}

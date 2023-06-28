@@ -16,7 +16,9 @@ const MyContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <MyContext.Provider value={{ proImageUrl }}>{children}</MyContext.Provider>
+    <MyContext.Provider value={{ proImageUrl, setProImageUrl }}>
+      {children}
+    </MyContext.Provider>
   );
 };
 
