@@ -7,13 +7,15 @@ const VideoController = ({
   youthPlayerVideo,
   toggleTop,
   setToggleTop,
-  currentProImgHandler,
+  // currentProImgHandler,
 
   handleSeek,
   currentTime,
   videoRef,
   handlePlayPause,
   isPlaying,
+  handleSkipForward,
+  handleSkipBackward,
 
   handleSeekYouth,
   currentTimeYouth,
@@ -21,6 +23,8 @@ const VideoController = ({
   handlePlayPauseYouth,
   isPlayingYouth,
   proImageUrl,
+  handleSkipForwardYouth,
+  handleSkipBackwardYouth,
 }) => {
   return (
     <div>
@@ -45,7 +49,11 @@ const VideoController = ({
           <motion.i
             whileTap={{ scale: 0.9 }}
             className="fa-solid fa-backward-fast text-white w-10 h-10 flex justify-center items-center cursor-pointer rounded-full"
-            onClick={() => currentProImgHandler("decrease")}
+            onClick={() => {
+              toggleTop === "top"
+                ? handleSkipBackward()
+                : handleSkipBackwardYouth();
+            }}
           ></motion.i>
           <motion.i
             whileTap={{ scale: 0.9 }}
@@ -65,7 +73,11 @@ const VideoController = ({
           <motion.i
             whileTap={{ scale: 0.9 }}
             className="fa-solid fa-forward-fast text-white w-10 h-10 flex justify-center items-center cursor-pointer rounded-full"
-            onClick={() => currentProImgHandler("increase")}
+            onClick={() => {
+              toggleTop === "top"
+                ? handleSkipForward()
+                : handleSkipForwardYouth();
+            }}
           ></motion.i>
         </div>
         <select

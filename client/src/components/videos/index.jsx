@@ -2,14 +2,16 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Videos from "./Videos";
 import Modal from "../Modal";
-import { useEffect, useState } from "react";
+import { useState, useContext } from "react";
 import AddVideo from "./AddVideo";
 import axios from "../../../utils/axios";
+import { MyContext } from "../../app/Context";
 
 const Index = () => {
-  const [allVideos, setAllVideos] = useState([]);
   const [modal, setModal] = useState(false);
   const [btnEnable, setEnable] = useState(true);
+
+  const { proImageUrl, setProImageUrl } = useContext(MyContext);
 
   const modalHandler = () => {
     setModal(!modal);
@@ -17,12 +19,12 @@ const Index = () => {
 
   const addVideo = (video) => {
     setEnable(false);
-    const temp = [...allVideos];
+    const temp = [...proImageUrl];
     axios
       .post("/video/postvideo", video)
       .then((res) => {
         temp.push(res.data);
-        setAllVideos(temp);
+        setProImageUrl(temp);
         modalHandler();
         setEnable(true);
       })
@@ -33,29 +35,18 @@ const Index = () => {
 
   const deleteVideo = (id) => {
     setEnable(false);
-    const temp = [...allVideos];
+    const temp = [...proImageUrl];
     axios
       .delete("/video/deletevideo/" + id)
       .then(() => {
         const newVideos = temp.filter((v) => v._id !== id);
-        setAllVideos(newVideos);
+        setProImageUrl(newVideos);
         setEnable(true);
       })
       .catch(() => {
         setEnable(true);
       });
   };
-
-  useEffect(() => {
-    axios
-      .get("/video/getvideos")
-      .then((res) => {
-        setAllVideos(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <div className="space-y-5">
@@ -70,7 +61,7 @@ const Index = () => {
         Add Video
       </motion.p>
       <div className="space-y-1">
-        {allVideos.map((video) => (
+        {proImageUrl.map((video) => (
           <Videos
             key={video._id}
             video={video}

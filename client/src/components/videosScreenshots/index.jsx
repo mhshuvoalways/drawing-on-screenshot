@@ -1,21 +1,22 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import html2canvas from "html2canvas";
 import { motion } from "framer-motion";
 import Videos from "./videos/Videos";
 import VideoController from "./videos/VideoController";
 import ScreenShots from "./screenshots";
 import { Link } from "react-router-dom";
-import axios from "../../../utils/axios";
+import { MyContext } from "../../app/Context";
 
 const Index = () => {
   const [proPlayerVideo, setProPlayerVideo] = useState(null);
-  const [proImageUrl, setProImageUrl] = useState([]);
   const [youthPlayerVideo, setYouthPlayerVideo] = useState(null);
   const [youthImageUrl, setYouthImageUrl] = useState([]);
   const [screenshotUrl, setScreenshotUrl] = useState([]);
   const [currentProImg, setCurrentProImg] = useState(0);
   const [edit, setEDit] = useState(false);
   const [toggleTop, setToggleTop] = useState("top");
+
+  const { proImageUrl, setProImageUrl } = useContext(MyContext);
 
   // video controller
   const [isPlaying, setIsPlaying] = useState(false);
@@ -60,6 +61,16 @@ const Index = () => {
       rafRef.current = requestAnimationFrame(handleTimeUpdate);
     }
     setIsPlaying(!isPlaying);
+  };
+
+  const handleSkipForward = () => {
+    const video = videoRef.current;
+    video.currentTime += video.duration * 0.03;
+  };
+
+  const handleSkipBackward = () => {
+    const video = videoRef.current;
+    video.currentTime -= video.duration * 0.03;
   };
 
   const handleSeek = (e) => {
@@ -114,6 +125,16 @@ const Index = () => {
       rafRefYouth.current = requestAnimationFrame(handleTimeUpdateYouth);
     }
     setIsPlayingYouth(!isPlayingYouth);
+  };
+
+  const handleSkipForwardYouth = () => {
+    const video = videoRefYouth.current;
+    video.currentTime += video.duration * 0.03;
+  };
+
+  const handleSkipBackwardYouth = () => {
+    const video = videoRefYouth.current;
+    video.currentTime -= video.duration * 0.03;
   };
 
   const handleSeekYouth = (e) => {
@@ -186,15 +207,6 @@ const Index = () => {
     }
   };
 
-  useEffect(() => {
-    axios
-      .get("/video/getvideos")
-      .then((response) => {
-        setProImageUrl(response.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
   return (
     <div>
       {edit ? (
@@ -253,6 +265,10 @@ const Index = () => {
             isPlayingYouth={isPlayingYouth}
             currentProImgHandler={currentProImgHandler}
             proImageUrl={proImageUrl}
+            handleSkipForward={handleSkipForward}
+            handleSkipBackward={handleSkipBackward}
+            handleSkipForwardYouth={handleSkipForwardYouth}
+            handleSkipBackwardYouth={handleSkipBackwardYouth}
           />
         </div>
       )}
