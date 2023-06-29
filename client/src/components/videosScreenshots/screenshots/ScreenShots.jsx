@@ -25,8 +25,8 @@ const ScreenShots = ({
     img.src = URL.createObjectURL(screenshotUrl[currentImage]?.screenshot);
 
     img.onload = () => {
-      const width = img.width;
-      const height = img.height;
+      const width = img.width / 2;
+      const height = img.height / 2;
       setImageSceenSize({
         width,
         height,
@@ -38,7 +38,7 @@ const ScreenShots = ({
     <div>
       <i
         className="fa-solid fa-arrow-left cursor-pointer text-white"
-        onClick={editScreen}
+        onClick={() => editScreen("clean")}
       ></i>
       <div className="relative">
         <div

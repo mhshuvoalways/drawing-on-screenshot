@@ -211,13 +211,13 @@ const Index = ({
           onClick={modalHandler}
         ></motion.i>
         <div className="flex justify-between gap-5 items-center">
-          <motion.button
+          {/* <motion.button
             whileTap={{ scale: 0.9 }}
             className="bg-green-600 rounded-md px-2 cursor-pointer"
             onClick={() => handleTakeSave("decrease")}
           >
             &lt;
-          </motion.button>
+          </motion.button> */}
           <p className="font-semibold">
             {currentImage + 1} out of {screenshotUrl.length}
           </p>

@@ -181,12 +181,13 @@ const Index = () => {
     }
   };
 
-  const editScreen = () => {
+  const editScreen = (value) => {
     setEDit(!edit);
     setIsPlaying(false);
     setCurrentTime(0);
     setIsPlayingYouth(false);
     setCurrentTimeYouth(0);
+    value === "clean" && setScreenshotUrl([]);
   };
 
   const currentProImgHandler = (value) => {
