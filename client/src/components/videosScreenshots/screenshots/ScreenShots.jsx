@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Line from "../../drawTools/Line";
 import Curved from "../../drawTools/Curved";
 import Rectangle from "../../drawTools/Ractangle";
@@ -15,30 +14,13 @@ const ScreenShots = ({
   clickAndSave,
   deleteLastScreenshot,
 }) => {
-  const [screenSize, setImageSceenSize] = useState({
-    width: 0,
-    height: 0,
-  });
-
-  useEffect(() => {
-    const img = new Image();
-    img.src = URL.createObjectURL(screenshotUrl[currentImage]?.screenshot);
-
-    img.onload = () => {
-      const width = img.width / 2;
-      const height = img.height / 2;
-      setImageSceenSize({
-        width,
-        height,
-      });
-    };
-  }, [currentImage, screenshotUrl]);
+  const screenSize = screenshotUrl[currentImage]?.screenSize;
 
   return (
     <div>
       <i
         className="fa-solid fa-arrow-left cursor-pointer text-white"
-        onClick={() => editScreen("clean")}
+        onClick={editScreen}
       ></i>
       <div className="relative">
         <div

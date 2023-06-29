@@ -15,6 +15,7 @@ const Index = () => {
   const [currentProImg, setCurrentProImg] = useState(0);
   const [edit, setEDit] = useState(false);
   const [toggleTop, setToggleTop] = useState("top");
+  const [takeS, setTakeS] = useState(false);
 
   const { proImageUrl, setProImageUrl } = useContext(MyContext);
 
@@ -147,8 +148,10 @@ const Index = () => {
   // Video control for youth
 
   const handleScreenshot = () => {
+    setTakeS(true);
     const element = document.getElementById("capture-element");
     html2canvas(element).then((canvas) => {
+      setTakeS(false);
       const dataUrl = canvas.toDataURL();
       const byteString = atob(dataUrl.split(",")[1]);
       const ab = new ArrayBuffer(byteString.length);
@@ -161,11 +164,21 @@ const Index = () => {
         lastModified: new Date().getTime(),
         type: "image/png",
       });
+      const screenSize = {};
+      const img = new Image();
+      img.onload = () => {
+        const { width, height } = img;
+        screenSize.width = width / 2;
+        screenSize.height = height / 2;
+      };
+      img.src = dataUrl;
+
       const temp = [...screenshotUrl];
       const newObj = {
         id: temp.length + 1,
         screenshot: screenshots,
         edited: false,
+        screenSize,
       };
       temp.push(newObj);
       setScreenshotUrl(temp);
@@ -181,13 +194,12 @@ const Index = () => {
     }
   };
 
-  const editScreen = (value) => {
+  const editScreen = () => {
     setEDit(!edit);
     setIsPlaying(false);
     setCurrentTime(0);
     setIsPlayingYouth(false);
     setCurrentTimeYouth(0);
-    value === "clean" && setScreenshotUrl([]);
   };
 
   const currentProImgHandler = (value) => {
@@ -210,6 +222,7 @@ const Index = () => {
 
   return (
     <div>
+      {takeS && <p className="absolute inset-0 bg-black opacity-70 z-50"></p>}
       {edit ? (
         <ScreenShots
           screenshotUrl={screenshotUrl}
