@@ -15,9 +15,8 @@ const Index = () => {
   const [currentProImg, setCurrentProImg] = useState(0);
   const [edit, setEDit] = useState(false);
   const [toggleTop, setToggleTop] = useState("top");
-  const [takeS, setTakeS] = useState(false);
 
-  const { proImageUrl, setProImageUrl } = useContext(MyContext);
+  const { proImageUrl, setProImageUrl, setTakeS } = useContext(MyContext);
 
   // video controller
   const [isPlaying, setIsPlaying] = useState(false);
@@ -222,7 +221,6 @@ const Index = () => {
 
   return (
     <div>
-      {takeS && <p className="absolute inset-0 bg-black opacity-70 z-50"></p>}
       {edit ? (
         <ScreenShots
           screenshotUrl={screenshotUrl}

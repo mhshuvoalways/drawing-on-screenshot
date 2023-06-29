@@ -5,6 +5,7 @@ const MyContext = createContext();
 
 const MyContextProvider = ({ children }) => {
   const [proImageUrl, setProImageUrl] = useState([]);
+  const [takeS, setTakeS] = useState(false);
 
   useEffect(() => {
     axios
@@ -16,7 +17,9 @@ const MyContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <MyContext.Provider value={{ proImageUrl, setProImageUrl }}>
+    <MyContext.Provider
+      value={{ proImageUrl, setProImageUrl, takeS, setTakeS }}
+    >
       {children}
     </MyContext.Provider>
   );
