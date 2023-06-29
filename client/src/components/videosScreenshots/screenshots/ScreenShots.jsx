@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Line from "../../drawTools/Line";
 import Curved from "../../drawTools/Curved";
 import Rectangle from "../../drawTools/Ractangle";
@@ -5,35 +6,52 @@ import ArrowLine from "../../drawTools/ArrowLine";
 import Text from "../../drawTools/Text";
 
 const ScreenShots = ({
-  divRef,
   editScreen,
   screenshotUrl,
   selectedTool,
-  screenSize,
   selectedColor,
   selectedThickness,
   currentImage,
   clickAndSave,
   deleteLastScreenshot,
 }) => {
+  const [screenSize, setImageSceenSize] = useState({
+    width: 0,
+    height: 0,
+  });
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = URL.createObjectURL(screenshotUrl[currentImage]?.screenshot);
+
+    img.onload = () => {
+      const width = img.width;
+      const height = img.height;
+      setImageSceenSize({
+        width,
+        height,
+      });
+    };
+  }, [currentImage, screenshotUrl]);
+
   return (
     <div>
       <i
         className="fa-solid fa-arrow-left cursor-pointer text-white"
-        onClick={editScreen}
+        onClick={() => editScreen("clear")}
       ></i>
-      <div className="relative w-full">
+      <div className="relative">
         <div
-          className="bg-center bg-no-repeat bg-cover w-full"
+          className="bg-center bg-no-repeat bg-cover"
           style={{
             backgroundImage: `url(${
               screenshotUrl.length &&
               URL.createObjectURL(screenshotUrl[currentImage]?.screenshot)
             })`,
-            height: `calc(100vh - 120px)`
+            height: `${screenSize.height}px`,
+            width: `${screenSize.width}px`,
           }}
           id="draw-capture"
-          ref={divRef}
         >
           <Curved
             selectedTool={selectedTool}

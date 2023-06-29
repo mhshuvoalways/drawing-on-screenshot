@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import DrawingTool from "./DrawTool";
@@ -15,10 +15,6 @@ const Index = ({
   editScreen,
   setScreenshotUrl,
 }) => {
-  const [screenSize, setSceenSize] = useState({
-    width: 100,
-    height: 100,
-  });
   const [currentImage, setCurrentImage] = useState(0);
   const [selectedTool, setSelectedTool] = useState("curved");
   const [selectedColor, setSelectedColor] = useState("#ffffff");
@@ -28,7 +24,6 @@ const Index = ({
   const [modal, setModal] = useState(false);
   const [notes, setNotes] = useState("");
   const [btnEnable, setEnable] = useState(true);
-  const divRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -188,17 +183,6 @@ const Index = ({
     setClickAndSave(false);
   };
 
-  useEffect(() => {
-    if (divRef.current) {
-      const width = divRef.current.clientWidth;
-      const height = divRef.current.clientHeight;
-      setSceenSize({
-        width,
-        height,
-      });
-    }
-  }, []);
-
   return (
     <div>
       {modal && (
@@ -211,11 +195,9 @@ const Index = ({
         </Modal>
       )}
       <ScreenShots
-        divRef={divRef}
         screenshotUrl={screenshotUrl}
         editScreen={editScreen}
         selectedTool={selectedTool}
-        screenSize={screenSize}
         selectedColor={selectedColor}
         selectedThickness={selectedThickness}
         currentImage={currentImage}
