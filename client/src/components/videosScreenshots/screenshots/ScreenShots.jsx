@@ -38,7 +38,7 @@ const ScreenShots = ({
     <div>
       <i
         className="fa-solid fa-arrow-left cursor-pointer text-white"
-        onClick={() => editScreen("clear")}
+        onClick={editScreen}
       ></i>
       <div className="relative">
         <div
