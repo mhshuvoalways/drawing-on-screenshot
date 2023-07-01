@@ -165,10 +165,11 @@ const Index = () => {
       });
       const screenSize = {};
       const img = new Image();
+      const dpr = window.devicePixelRatio;
       img.onload = () => {
         const { width, height } = img;
-        screenSize.width = width / 2;
-        screenSize.height = height / 2;
+        screenSize.width = width / dpr;
+        screenSize.height = height / dpr;
       };
       img.src = dataUrl;
 

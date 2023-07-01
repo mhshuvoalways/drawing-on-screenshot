@@ -85,7 +85,8 @@ const VideoController = ({
         <select
           className=" outline-0 rounded-md text-black px-1 py-1"
           onChange={(event) => {
-            toggleTop === "top" ? handlePlayPause() : handlePlayPauseYouth();
+            isPlaying && handlePlayPause();
+            isPlayingYouth && handlePlayPauseYouth();
             setToggleTop(event.target.value);
           }}
         >
