@@ -8,7 +8,7 @@ const Items = ({ screenshot, index, deleteHandler }) => {
         <p>#{index + 1}</p>
         <div className="flex gap-5 text-xl">
           <CopyToClipboard
-            text={`http://localhost:5173/share/${screenshot._id}`}
+            text={`https://baseball-direction.netlify.app/share/${screenshot._id}`}
           >
             <motion.i
               whileTap={{ scale: 0.9 }}
